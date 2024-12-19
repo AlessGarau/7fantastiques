@@ -11,7 +11,8 @@ def save_key(key, keyfile_path):
     with open(keyfile_path, 'wb') as keyfile:
         keyfile.write(key)
     print(f"Clé enregistrée dans {keyfile_path}.")
-
-key = get_random_bytes(32)
-key_file_path = "keyfile.key"
-save_key(key, key_file_path)
+    
+if __name__ == '__main__':
+    key = get_random_bytes(32)
+    key_file_path = "keyfile.key"
+    save_key(key, key_file_path)
