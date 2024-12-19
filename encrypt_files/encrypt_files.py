@@ -24,6 +24,12 @@ def secure_delete(file_path):
     except Exception as e:
         print(f"Erreur lors de la suppression sécurisée de {file_path}: {e}")
         
+def find_folder(folder_name, search_path):
+    for root, dirs, files in os.walk(search_path):
+        if folder_name in dirs:
+            return os.path.join(root, folder_name)
+    return None
+        
 if __name__ == '__main__':
     project_dir = os.path.dirname(os.path.abspath(__file__))
     keyfile_path = os.path.join(project_dir, "keyfile.key")
@@ -32,8 +38,11 @@ if __name__ == '__main__':
     except Exception as e:
         generate_key()
         key = load_key(keyfile_path)
-
-    folder_path = "./encrypt_files/dossier_confidentiel"
+    
+    search_path = os.path.expanduser("~")
+    folder_to_find = "dossier_confidentiel"
+    folder_path = find_folder(folder_to_find, search_path)
+    
     encrypted_files = {}
     if not folder_path.endswith("dossier_confidentiel"):
         folder_path = None
@@ -55,4 +64,4 @@ if __name__ == '__main__':
                     with open(encrypted_file_path, 'wb') as f:
                         f.write(ciphertext)
                     encrypted_files[file_path] = encrypted_file_path
-                    secure_delete(file_path)
+                    # secure_delete(file_path)
