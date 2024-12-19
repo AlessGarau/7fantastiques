@@ -92,7 +92,9 @@ pyinstaller --onefile \
 echo "Création de l'exécutable de déchiffrement..."
 pyinstaller --onefile \
   "$DECRYPT_SCRIPT" \
+  --add-data "$KEY_FILE:." \
   --name "$OUTPUT_NAME_DECRYPT" \
+  --add-data "$ADDITIONAL_SCRIPT:$ADDITIONAL_SCRIPT" \
   --distpath "./dist" \
   --hidden-import "Crypto" \
   --hidden-import "Crypto.Cipher" \
