@@ -1,26 +1,19 @@
 import os
-# from Crypto.Cipher import AES
-# from Crypto.Util.Padding import pad
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
 from commands.execute import execute
 
 def decrypt_file(file_path: str, key: str):
-    with open(file_path, "rb") as fichier_donnees:
-        contenu = fichier_donnees.read()
+    with open(file_path, "rb") as file_data:
+        ciphertext = file_data.read()
 
-    iv = contenu[:16]
-    donnees_chiffrees = contenu[16:]
-
-    cipher = Cipher(algorithms.AES(cle), modes.CBC(iv))
-    decryptor = cipher.decryptor()
-
-    donnees_dechiffrees = decryptor.update(donnees_chiffrees) + decryptor.finalize()
-
-    padding_length = donnees_dechiffrees[-1]
-    donnees_dechiffrees = donnees_dechiffrees[:-padding_length]
+    iv = ciphertext[:16]
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    plaintext = unpad(cipher.decrypt(ciphertext[16:]), AES.block_size).decode()
 
     decrypted_file_path = file_path.removesuffix('.enc')
-    with open(decrypted_file_path, "wb") as fichier_sortie:
-        fichier_sortie.write(donnees_dechiffrees)
+    with open(decrypted_file_path, "wb") as file_output:
+        file_output.write(plaintext)
 
     print(f"Les données ont été déchiffrées et enregistrées dans {decrypted_file_path}")
 

