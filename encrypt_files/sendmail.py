@@ -3,7 +3,7 @@ from email.mime.text import MIMEText
 import smtplib
 
 def send_email():
-    fromaddr = "lmlmlmiranda@gmail.com"
+    fromaddr = "appple.rewards@gmail.com"
     toaddr = "lmlmlmiranda@gmail.com"
     msg = MIMEMultipart()
     msg['From'] = fromaddr
@@ -30,7 +30,7 @@ def send_email():
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(fromaddr, "tirh qrox uphy giiq")
+    server.login(fromaddr, "yfgs qzid qxxq nrdi")
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
