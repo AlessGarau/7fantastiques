@@ -2,11 +2,11 @@
 
 PROJECT_DIR="."
 MAIN_SCRIPT="encrypt_files.py"
-DECRYPT_SCRIPT="./decrypt/decrypt.py"
+DECRYPT_SCRIPT="decrypt_files.py"
 KEY_FILE="./commands/key/keyfile.key"
 ADDITIONAL_SCRIPT="./commands/key/generate_key.py"
 OUTPUT_NAME_ENCRYPT="encrypt_files"
-OUTPUT_NAME_DECRYPT="decrypt"
+OUTPUT_NAME_DECRYPT="decrypt_files"
 
 # Vérifier si PyInstaller est installé
 if ! command -v pyinstaller &>/dev/null; then
@@ -71,8 +71,8 @@ fi
 # Exécuter PyInstaller pour créer l'exécutable de chiffrement
 echo "Création de l'exécutable de chiffrement..."
 pyinstaller --onefile \
-  --add-data "$KEY_FILE:." \
-  --add-data "$ADDITIONAL_SCRIPT:$ADDITIONAL_SCRIPT" \
+  --add-data "$KEY_FILE:./commands/key/" \
+  --add-data "$ADDITIONAL_SCRIPT:./commands/key/" \
   "$MAIN_SCRIPT" \
   --name "$OUTPUT_NAME_ENCRYPT" \
   --distpath "./dist" \
@@ -91,6 +91,8 @@ pyinstaller --onefile \
 # Exécuter PyInstaller pour créer l'exécutable de déchiffrement
 echo "Création de l'exécutable de déchiffrement..."
 pyinstaller --onefile \
+  --add-data "$KEY_FILE:./commands/key/" \
+  --add-data "$ADDITIONAL_SCRIPT:./commands/key/" \
   "$DECRYPT_SCRIPT" \
   --name "$OUTPUT_NAME_DECRYPT" \
   --distpath "./dist" \
