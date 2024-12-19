@@ -29,10 +29,9 @@ def generate_key():
 ```
 
 ### Chiffrement des fichiers
-Ici, nous chiffrons les fichiers grâce à une itération sur chaque fichier, qui est ensuite chiffré avec la fonction encrypt_file.
 
 La fonction encrypt_file prend en paramètres le chemin du fichier et la clé de chiffrement.
-Nous ouvrons d'abord le fichier avec python en mode binaire (c'est la signification de l'option 'rb').
+Nous ouvrons d'abord le fichier avec python en mode lecture binaire (c'est la signification de l'option 'rb').
 C'est important d'ouvrir le fichier en mode binaire parce qu'AES ne peut chiffrer que des octets et non du texte. Nous enregistrons ainsi le contenu du fichier sous forme de bytes dans la variable file_data.
 Ensuite nous créons un nouveau object AES de la lirairie PyCryptodome en mode CBC (Cipher Block Chaining), qui doit nous permettre de chiffrer le fichier.
 
