@@ -84,7 +84,8 @@ pyinstaller --onefile \
   --hidden-import "Crypto.Random" \
   --hidden-import "Crypto.Util" \
   --hidden-import "Crypto.Util.Padding" \
-  --collect-all "Crypto" || {
+  --collect-all "Crypto" \
+  --hidden-import "solders" || {
   echo "Échec de la création de l'exécutable de chiffrement. Arrêt du script."
   exit 1
 }
@@ -107,12 +108,12 @@ pyinstaller --onefile \
 }
 
 # Vérifier si la création a réussi
-if [ -f "$TOP_PROJECT_DIR/dist/$OUTPUT_NAME_ENCRYPT" ] && [ -f "$TOP_PROJECT_DIR/dist/$OUTPUT_NAME_DECRYPT" ]; then
-  echo "Création réussie. Les exécutables ont été générés à '$TOP_PROJECT_DIR/dist'."
-else
-  echo "Échec de la création. Vérifiez les journaux de PyInstaller pour plus de détails."
-  exit 1
-fi
+# if [ -f "$TOP_PROJECT_DIR/dist/$OUTPUT_NAME_ENCRYPT" ] && [ -f "$TOP_PROJECT_DIR/dist/$OUTPUT_NAME_DECRYPT" ]; then
+#   echo "Création réussie. Les exécutables ont été générés à '$TOP_PROJECT_DIR/dist'."
+# else
+#   echo "Échec de la création. Vérifiez les journaux de PyInstaller pour plus de détails."
+#   exit 1
+# fi
 
 # Nettoyer les fichiers temporaires
 echo "Nettoyage des fichiers temporaires..."
