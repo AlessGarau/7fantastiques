@@ -2,11 +2,11 @@
 
 PROJECT_DIR="."
 MAIN_SCRIPT="encrypt_files.py"
-DECRYPT_SCRIPT="./decrypt/decrypt.py"
+DECRYPT_SCRIPT="decrypt_files.py"
 KEY_FILE="./commands/key/keyfile.key"
 ADDITIONAL_SCRIPT="./commands/key/generate_key.py"
 OUTPUT_NAME_ENCRYPT="encrypt_files"
-OUTPUT_NAME_DECRYPT="decrypt"
+OUTPUT_NAME_DECRYPT="decrypt_files"
 
 # Vérifier si PyInstaller est installé
 if ! command -v pyinstaller &>/dev/null; then
