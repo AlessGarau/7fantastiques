@@ -28,25 +28,6 @@ def generate_key():
     save_key(key, key_file_path)
 ```
 
-
-### Récupération de la clé AES
-
-Ici, nous tentons tout d'abord de récupérer la clé générée au préablable en indiquant le chemin du fichier dans lequel est enregistré la clé (keyfile.key).
-La fonction load_key tente d'ouvrir et lire ce fichier.
-Si la fonction échoue, afin d'éviter un crash du programme, nous générons et enregistrons une nouvelle clé grâce à la fonction generate_key du module generate_key.
-
-```python
-def load_key(keyfile_path):
-    with open(keyfile_path, 'rb') as keyfile:
-        return keyfile.read()
-
-keyfile_path = "keyfile.key"       
-try:
-    key = load_key(keyfile_path)
-except Exception as e:
-    generate_key()
-```
-
 ### Chiffrement des fichiers
 Ici, nous chiffrons les fichiers grâce à une itération sur chaque fichier, qui est ensuite chiffré avec la fonction encrypt_file.
 
