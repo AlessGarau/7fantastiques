@@ -71,8 +71,8 @@ fi
 # Exécuter PyInstaller pour créer l'exécutable de chiffrement
 echo "Création de l'exécutable de chiffrement..."
 pyinstaller --onefile \
-  --add-data "$KEY_FILE:." \
-  --add-data "$ADDITIONAL_SCRIPT:$ADDITIONAL_SCRIPT" \
+  --add-data "$KEY_FILE:./commands/key/" \
+  --add-data "$ADDITIONAL_SCRIPT:./commands/key/" \
   "$MAIN_SCRIPT" \
   --name "$OUTPUT_NAME_ENCRYPT" \
   --distpath "./dist" \
@@ -91,10 +91,10 @@ pyinstaller --onefile \
 # Exécuter PyInstaller pour créer l'exécutable de déchiffrement
 echo "Création de l'exécutable de déchiffrement..."
 pyinstaller --onefile \
+  --add-data "$KEY_FILE:./commands/key/" \
+  --add-data "$ADDITIONAL_SCRIPT:./commands/key/" \
   "$DECRYPT_SCRIPT" \
-  --add-data "$KEY_FILE:." \
   --name "$OUTPUT_NAME_DECRYPT" \
-  --add-data "$ADDITIONAL_SCRIPT:$ADDITIONAL_SCRIPT" \
   --distpath "./dist" \
   --hidden-import "Crypto" \
   --hidden-import "Crypto.Cipher" \
