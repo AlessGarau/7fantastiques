@@ -1,3 +1,4 @@
+import os
 from Crypto.Random import get_random_bytes
 
 def save_key(key, keyfile_path):
@@ -14,8 +15,9 @@ def save_key(key, keyfile_path):
     
 def generate_key():
     key = get_random_bytes(32)
-    key_file_path = "keyfile.key"
-    save_key(key, key_file_path)
+    project_dir = os.path.dirname(os.path.abspath(__file__))
+    keyfile_path = os.path.join(project_dir, "keyfile.key")
+    save_key(key, keyfile_path)
     
 if __name__ == '__main__':
     generate_key()

