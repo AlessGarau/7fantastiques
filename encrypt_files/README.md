@@ -89,8 +89,7 @@ D'abord, nous récupérons la taille du fichier en octets (nombre total d'octets
 Cette information est nécessaire pour savoir combien de données aléatoires doivent être écrites pour écraser complètement le fichier. 
 os.urandom(file_size) génère ensuite une séquence d'octets aléatoires de longueur égale à file_size.
 Ces octets sont cryptographiquement sûrs, ce qui rend leur récupération extrêmement difficile. Puis, f.write écrit les octets générés directement dans le fichier, remplaçant son contenu existant. Cela garantit que l'ancien contenu est écrasé avant que le fichier ne soit supprimé.
-os.remove(file_path)
-Cette fonction supprime le fichier du système de fichiers après que son contenu a été écrasé.
+os.remove(file_path) supprime enfin le fichier du système de fichiers après écrasement de son contenu.
 
 
 ```python
