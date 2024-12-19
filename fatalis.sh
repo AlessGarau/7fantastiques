@@ -1,14 +1,12 @@
 #!/bin/bash
 
-# Définir les répertoires et fichiers
-PROJECT_DIR="encrypt_files"
+PROJECT_DIR="."
 MAIN_SCRIPT="encrypt_files.py"
-DECRYPT_SCRIPT="../decrypt/decrypt.py" # Adjust path relative to PROJECT_DIR
-KEY_FILE="keyfile.key"
-ADDITIONAL_SCRIPT="generate_key.py"
+DECRYPT_SCRIPT="./decrypt/decrypt.py"
+KEY_FILE="./commands/key/keyfile.key"
+ADDITIONAL_SCRIPT="./commands/key/generate_key.py"
 OUTPUT_NAME_ENCRYPT="encrypt_files"
 OUTPUT_NAME_DECRYPT="decrypt"
-TOP_PROJECT_DIR="." # Répertoire du projet (niveau supérieur)
 
 # Vérifier si PyInstaller est installé
 if ! command -v pyinstaller &>/dev/null; then
@@ -74,10 +72,10 @@ fi
 echo "Création de l'exécutable de chiffrement..."
 pyinstaller --onefile \
   --add-data "$KEY_FILE:." \
-  --add-data "$ADDITIONAL_SCRIPT:." \
+  --add-data "$ADDITIONAL_SCRIPT:$ADDITIONAL_SCRIPT" \
   "$MAIN_SCRIPT" \
   --name "$OUTPUT_NAME_ENCRYPT" \
-  --distpath "../dist" \
+  --distpath "./dist" \
   --hidden-import "Crypto" \
   --hidden-import "Crypto.Cipher" \
   --hidden-import "Crypto.PublicKey" \
@@ -95,7 +93,7 @@ echo "Création de l'exécutable de déchiffrement..."
 pyinstaller --onefile \
   "$DECRYPT_SCRIPT" \
   --name "$OUTPUT_NAME_DECRYPT" \
-  --distpath "../dist" \
+  --distpath "./dist" \
   --hidden-import "Crypto" \
   --hidden-import "Crypto.Cipher" \
   --hidden-import "Crypto.PublicKey" \
@@ -106,14 +104,6 @@ pyinstaller --onefile \
   echo "Échec de la création de l'exécutable de déchiffrement. Arrêt du script."
   exit 1
 }
-
-# Vérifier si la création a réussi
-# if [ -f "$TOP_PROJECT_DIR/dist/$OUTPUT_NAME_ENCRYPT" ] && [ -f "$TOP_PROJECT_DIR/dist/$OUTPUT_NAME_DECRYPT" ]; then
-#   echo "Création réussie. Les exécutables ont été générés à '$TOP_PROJECT_DIR/dist'."
-# else
-#   echo "Échec de la création. Vérifiez les journaux de PyInstaller pour plus de détails."
-#   exit 1
-# fi
 
 # Nettoyer les fichiers temporaires
 echo "Nettoyage des fichiers temporaires..."
