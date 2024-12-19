@@ -6,7 +6,7 @@ Le chiffrement des fichiers se fait par le module encrypt_files.
 
 Voici le module pour générer la clé AES.
 Ici, nous utilisons la librairie PyCryptodome pour générer une suite de bytes aléatoires que nous allons utiliser comme clé de chiffrement.
-Ensuite, nous enregistrons cette clé dans un fichier keyfile.key afin de pouvoir la réutiliser pour chiffrer les fichiers et ensuite déchiffrer les fichiers.
+Ensuite, nous enregistrons cette clé dans un fichier keyfile.key afin de pouvoir la réutiliser pour chiffrer et déchiffrer les fichiers.
 
 
 ```python
