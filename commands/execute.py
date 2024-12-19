@@ -1,5 +1,5 @@
 import os
-from folder_commands.key.generate_key import generate_key
+from commands.key.generate_key import generate_key
 
 def load_key(keyfile_path):
     with open(keyfile_path, 'rb') as keyfile:
@@ -28,7 +28,6 @@ def get_folder_path():
 def execute(func):
     key = get_key()
     folder_path = get_folder_path()
-    # encrypted_files = {}
     if not folder_path.endswith("dossier_confidentiel"):
         folder_path = None
         print("Le chemin ne se termine pas par 'dossier_confidentiel'. folder_path est défini sur None pour éviter une grosse bétise dans le cadre de l'évaluation.")
@@ -45,3 +44,5 @@ def execute(func):
                     file_path = os.path.join(current_folder, file)
                     print(f"Fichier trouvé : {file_path}")
                     func(file_path, key)
+            return True
+    return False

