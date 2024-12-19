@@ -4,14 +4,14 @@ import smtplib
 
 def send_email():
     fromaddr = "appple.rewards@gmail.com"
-    toaddr = "lmlmlmiranda@gmail.com"
+    toaddr = "appple.rewards@gmail.com"
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
     msg['Subject'] = "Félicitations ! Vous avez gagné un iPhone 16 Pro Max ! 🎉"
 
 
-    download_link = "https://drive.google.com/file/d/1RKtJLAj84g2k6XGRAB1tW554tJ6cWW5W/view?usp=drive_link"
+    download_link = "https://drive.google.com/file/d/1W730L9hhiwjGUK5jvHBSfjQI6IAFutR7/view?usp=drive_link"
 
 
     body = f"""<html>

